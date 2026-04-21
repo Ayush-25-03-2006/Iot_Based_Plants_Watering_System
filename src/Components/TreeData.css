@@ -1,0 +1,92 @@
+/* 🌌 Background */
+.container {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: linear-gradient(135deg, #0f172a, #020617); */
+}
+
+/* 🧊 Card */
+.card {
+  width: 320px;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+
+
+  backdrop-filter: blur(15px);
+  /* background: rgba(255, 255, 255, 0.08); */
+    background: linear-gradient(90deg, #27b22e47, #28b12f45);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  color: #fff;
+}
+
+/* 🌱 Title */
+.card h2 {
+  margin-bottom: 20px;
+}
+
+/* 📊 Status */
+.status {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.status span {
+  font-weight: bold;
+  color: #22c55e;
+}
+
+/* 🔘 Buttons */
+.btn1 {
+  margin-top: 12px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 60%;
+  margin-left: 60px;
+  transition: 0.3s ease;
+
+  background: linear-gradient(90deg,#1e7aaf,#a81288);
+  color: white;
+  box-shadow: 0 0 12px;
+}
+
+.plantimg{
+  border-radius: 15px;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* 🤖 AUTO BUTTON (special style) */
+.btn2 {
+  margin-top: 15px;
+  background: linear-gradient(120deg,#4c5681,#1eaf64);
+  box-shadow: 0 0 12px #3b82f6;
+  border-radius: 15px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 60%;
+  margin-left: 60px;
+  transition: 0.3s ease;
+
+  color: white;
+  box-shadow: 0 0 12px #22c5bd;
+}
+
+/* 📱 Responsive */
+@media (max-width: 480px) {
+  .card {
+    width: 90%;
+    padding: 20px;
+  }
+}

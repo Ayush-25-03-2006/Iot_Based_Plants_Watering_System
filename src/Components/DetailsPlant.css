@@ -1,0 +1,50 @@
+.guide-container {
+  padding: 30px;
+  text-align: center;
+}
+
+.guide-title {
+  margin-bottom: 20px;
+  color: #22c55e;
+}
+
+/* Table wrapper for scroll */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Table */
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Header */
+.guide-table th {
+  background: #22c55e;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+}
+
+/* Rows */
+.guide-table td {
+  padding: 12px;
+  color: #e2e8f0;
+  text-align: left;
+}
+
+/* Alternate row */
+.guide-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Hover effect */
+.guide-table tr:hover {
+  background: rgba(34, 197, 94, 0.2);
+}

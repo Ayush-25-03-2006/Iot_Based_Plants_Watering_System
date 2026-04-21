@@ -1,0 +1,117 @@
+body {
+  background: linear-gradient(90deg, #27b2765e, #b128a845);
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+}
+
+/* Title */
+.demo-title {
+  text-align: center;
+  margin: 20px 10px;
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: bold;
+  color: #38bdf8;
+  letter-spacing: 1px;
+}
+
+/* 🔥 Grid Layout (Fix: 2 per row) */
+.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* ✅ 2 videos per row */
+  gap: 15px;
+  justify-items: center;
+  padding: 20px;
+}
+
+/* 📱 Mobile → 1 per row */
+@media (max-width: 768px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card */
+.demo-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.demo-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* Video */
+.demo-video {
+  width: 100%;
+  height: clamp(160px, 25vw, 220px);
+  object-fit: cover;
+  filter: brightness(0.85) contrast(1.1);
+}
+
+/* Body */
+.card-body {
+  text-align: center;
+  padding: 5px;
+  flex-grow: 1;
+}
+
+/* Title */
+.card-title {
+  font-size: clamp(16px, 3vw, 18px);
+  font-weight: bold;
+  color: #22c55e;
+}
+
+/* Text */
+.card-text {
+  font-size: clamp(13px, 2.5vw, 14px);
+  color: #cbd5f5;
+}
+
+/* Buttons (if needed later) */
+.custom-btn {
+  margin-top: 10px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.green {
+  background: #22c55e;
+  color: white;
+  box-shadow: 0 0 12px #22c55e;
+}
+
+.red {
+  background: #ef4444;
+  color: white;
+  box-shadow: 0 0 12px #ef4444;
+}
+
+.custom-btn:hover {
+  transform: scale(1.08);
+}
+
+/* Status */
+.status-text {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #e2e8f0;
+}

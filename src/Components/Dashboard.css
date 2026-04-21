@@ -1,0 +1,103 @@
+#con {
+  min-height: 40vh;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+/* Heading */
+#con h1 {
+  font-size: clamp(24px, 5vw, 36px);
+  margin-bottom: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Card Container */
+#con > div {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Card */
+.card {
+  flex: 1 1 280px; /* responsive width */
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: 0.4s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hover */
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+}
+
+/* Image */
+.card-img-top {
+  width: 100%;
+  height: clamp(220px, 25vw, 180px);
+  object-fit: cover;
+  transition: 0.4s;
+  border-radius: 15px;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.1);
+}
+
+/* Body */
+.card-body {
+  padding: 15px;
+  flex-grow: 1;
+}
+
+/* Text */
+.card-text {
+  font-size: clamp(13px, 2.5vw, 15px);
+  line-height: 1.5;
+  margin-bottom: 7px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+
+/* 📱 Small Mobile */
+@media (max-width: 480px) {
+  #con {
+    padding: 15px;
+  }
+
+  #con > div {
+    gap: 20px;
+  }
+
+  .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* 📱 Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  .card {
+    flex: 1 1 45%;
+  }
+}
+
+/* 💻 Large Screens */
+@media (min-width: 1024px) {
+  #con > div {
+    gap: 30px;
+  }
+}
