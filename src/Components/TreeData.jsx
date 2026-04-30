@@ -16,7 +16,8 @@ function TreeData() {
   // ⏱ Store interval safely
   const autoIntervalRef = useRef(null);
 
-  const BACKEND_URL = "http://192.168.29.34:10000/api/system";
+  // const BACKEND_URL = "http://192.168.29.34:10000/api/system";
+  const BACKEND_URL = "http://10.15.196.151:10000/api/system";
 
   const fetchStatus = async () => {
     try {
