@@ -1,48 +1,97 @@
+/* =========================
+   🎯 ROOT VARIABLES
+========================= */
+:root {
+  --gap: 24px;
+  --radius: 15px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+  --primary: rgba(0, 123, 255, 0.3);
+}
+
+/* =========================
+   📦 CARD GRID
+========================= */
 .card-group {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--gap);
   padding: 30px;
 }
 
-/* Responsive (mobile friendly) */
-@media (max-width: 992px) {
-  .card-group {
-    grid-template-columns: repeat(2, 1fr); /* 2 per row */
+/* =========================
+   📱 RESPONSIVE DESIGN
+========================= */
+@media (max-width: 480px) {
+  .card {
+    margin: 10px;
   }
 }
 
-@media (max-width: 576px) {
-  .card-group {
-    grid-template-columns: 1fr; /* 1 per row */
-  }
-}
-
-@media (max-width: 480px){
-    .card{
-        margin: 20px;
-        border-radius: 15px;
-    }
-}
-
-/* 🌟 Page Load Animation */
+/* =========================
+   🌟 CARD BASE STYLE
+========================= */
 .card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(40px);
   animation: fadeUp 0.6s ease forwards;
-  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Stagger effect (automatic delay per card) */
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-.card:nth-child(6) { animation-delay: 0.6s; }
-.card:nth-child(7) { animation-delay: 0.7s; }
+/* =========================
+   🎬 STAGGER ANIMATION (Dynamic)
+========================= */
+.card {
+  animation-delay: calc(var(--i) * 0.1s);
+}
 
-/* Keyframes */
+/* =========================
+   ✨ HOVER EFFECT
+========================= */
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--hover-shadow);
+}
+
+/* =========================
+   🖼 IMAGE ZOOM EFFECT
+========================= */
+.card-img-top {
+  transition: transform 0.4s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.08);
+}
+
+/* =========================
+   💫 RIPPLE EFFECT
+========================= */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 120px;
+  height: 120px;
+  background: var(--primary);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.card:active::after {
+  transform: scale(3.5);
+  opacity: 1;
+}
+
+/* =========================
+   🎞 KEYFRAMES
+========================= */
 @keyframes fadeUp {
   to {
     opacity: 1;
@@ -50,47 +99,9 @@
   }
 }
 
-/* ✨ Hover Effect */
-.card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-/* 💫 Image zoom */
-.card-img-top {
-  transition: transform 0.4s ease;
-}
-
-.card:hover .card-img-top {
-  transform: scale(1.1);
-}
-
-/* 🔘 Click Ripple Effect */
-.card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-}
-
-.card::after {
-  content: "";
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: rgba(0, 123, 255, 0.3);
-  border-radius: 50%;
-  transform: scale(0);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.hr{
-    color: white;
-}
-
-/* On click */
-.card:active::after {
-  transform: scale(4);
-  opacity: 1;
-  transition: 0.5s;
+/* =========================
+   ➖ HR STYLE
+========================= */
+.hr {
+  color: white;
 }
