@@ -14,13 +14,17 @@
   border-radius: 20px;
   text-align: center;
 
-
   backdrop-filter: blur(15px);
   /* background: rgba(255, 255, 255, 0.08); */
-    background: linear-gradient(90deg, #27b22e47, #28b12f45);
+  background: linear-gradient(90deg, #27b22e47, #28b12f45);
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
   color: #fff;
+
+  /* Remove ripple/tap effect */
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  user-select: none;
 }
 
 /* 🌱 Title */
@@ -54,24 +58,20 @@
   background: linear-gradient(90deg,#1e7aaf,#a81288);
   color: white;
   box-shadow: 0 0 12px;
+
+  /* Remove ripple */
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  user-select: none;
 }
 
-.plantimg{
-  border-radius: 15px;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-}
-
-/* 🤖 AUTO BUTTON (special style) */
+/* 🤖 AUTO BUTTON */
 .btn2 {
   margin-top: 15px;
   background: linear-gradient(120deg,#4c5681,#1eaf64);
-  box-shadow: 0 0 12px #3b82f6;
-  border-radius: 15px;
-  padding: 10px 20px;
+
   border-radius: 25px;
+  padding: 10px 20px;
   border: none;
   cursor: pointer;
   font-size: 16px;
@@ -81,6 +81,39 @@
 
   color: white;
   box-shadow: 0 0 12px #22c5bd;
+
+  /* Remove ripple */
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  user-select: none;
+}
+
+/* Hover */
+.btn1:hover,
+.btn2:hover {
+  transform: scale(1.05);
+}
+
+/* Remove focus/click effect */
+.btn1:focus,
+.btn1:active,
+.btn2:focus,
+.btn2:active,
+.card:focus,
+.card:active {
+  outline: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* 🌿 Plant Image */
+.plantimg {
+  border-radius: 15px;
+}
+
+/* Remove tap highlight globally */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* 📱 Responsive */
@@ -88,5 +121,13 @@
   .card {
     width: 90%;
     padding: 20px;
+  }
+
+  .btn1,
+  .btn2 {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
 }
