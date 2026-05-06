@@ -1,143 +1,144 @@
+/* 🌌 Page Background */
 body {
-  background: linear-gradient(90deg, #27b2765e, #b128a845);
-  font-family: "Segoe UI", sans-serif;
   margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: white;
 }
 
-/* Title */
+/* 🔥 Title */
 .demo-title {
   text-align: center;
-  margin: 20px 10px;
-  font-size: clamp(20px, 5vw, 28px);
+  margin: 30px 10px;
+
+  font-size: clamp(24px, 5vw, 36px);
   font-weight: bold;
+
   color: #38bdf8;
+  line-height: 1.5;
   letter-spacing: 1px;
 }
 
-/* Grid Layout */
+/* 📦 Row Layout */
 .row {
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  justify-items: center;
+
+  gap: 25px;
   padding: 20px;
+
+  justify-items: center;
 }
 
-/* Mobile */
+/* 📱 Mobile Responsive */
 @media (max-width: 768px) {
   .row {
     grid-template-columns: 1fr;
   }
 }
 
-/* Card */
+/* 🎬 Demo Card */
 .demo-card {
   width: 100%;
   max-width: 400px;
-  border-radius: 18px;
+
+  border-radius: 22px;
   overflow: hidden;
-  border: none;
 
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
 
-  display: flex;
-  flex-direction: column;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
 
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-  transition: all 0.3s ease;
-}
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 
-/* Hover */
-.demo-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
-}
-
-/* Video */
-.demo-video {
-  width: 100%;
-  height: clamp(160px, 25vw, 220px);
-  object-fit: cover;
-  filter: brightness(0.85) contrast(1.1);
-}
-
-/* Body */
-.card-body {
-  text-align: center;
-  padding: 15px;
-  flex-grow: 1;
-}
-
-/* Card Title */
-.card-title {
-  font-size: clamp(16px, 3vw, 18px);
-  font-weight: bold;
-  color: #22c55e;
-  margin-bottom: 10px;
-}
-
-/* Card Text */
-.card-text {
-  font-size: clamp(13px, 2.5vw, 14px);
-  color: #e2e8f0;
-  margin-bottom: 15px;
-}
-
-/* Buttons */
-.custom-btn {
-  margin-top: 10px;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.3s;
+  transition: 0.35s ease;
 
   /* Remove Ripple Effect */
   -webkit-tap-highlight-color: transparent !important;
   outline: none !important;
-  box-shadow: none !important;
   user-select: none;
 }
 
-/* Remove focus/click effect */
-button:focus,
-button:active,
-.custom-btn:focus,
-.custom-btn:active {
-  outline: none !important;
-  box-shadow: none !important;
-  transform: none !important;
+/* ✨ Hover Effect */
+.demo-card:hover {
+  transform: translateY(-8px) scale(1.02);
+
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
 }
 
-/* Remove mobile tap highlight */
+/* 🎥 Video */
+.demo-video {
+  width: 100%;
+  height: clamp(200px, 25vw, 240px);
+
+  object-fit: cover;
+
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+
+  filter: brightness(0.92) contrast(1.05);
+}
+
+/* 📝 Card Body */
+.card-body {
+  padding: 18px;
+  text-align: center;
+}
+
+/* 🏷 Card Title */
+.card-title {
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: bold;
+
+  color: #22c55e;
+
+  margin-bottom: 10px;
+}
+
+/* 📄 Card Text */
+.card-text {
+  font-size: clamp(13px, 2vw, 15px);
+
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+/* 🚫 Remove Focus & Click Ripple */
+.demo-card:focus,
+.demo-card:active,
+.demo-video:focus,
+.demo-video:active,
+video:focus,
+video:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 🌍 Remove Tap Highlight Globally */
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Green Button */
-.green {
-  background: #22c55e;
-  color: white;
-  box-shadow: 0 0 12px #22c55e;
-}
+/* 📱 Small Mobile */
+@media (max-width: 480px) {
+  .demo-title {
+    font-size: 24px;
+  }
 
-/* Red Button */
-.red {
-  background: #ef4444;
-  color: white;
-  box-shadow: 0 0 12px #ef4444;
-}
+  .row {
+    gap: 20px;
+    padding: 15px;
+  }
 
-/* Button Hover */
-.custom-btn:hover {
-  transform: scale(1.08);
-}
+  .demo-card {
+    border-radius: 18px;
+  }
 
-/* Status Text */
-.status-text {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #e2e8f0;
+  .demo-video {
+    height: 200px;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
 }

@@ -1,55 +1,152 @@
+/* 🌌 Main Section */
 #con {
-  min-height: 40vh;
-  padding: 20px;
-  color: #fff;
+  min-height: 100vh;
+  padding: 40px 20px;
+
+  background: linear-gradient(135deg, #0f172a, #020617);
+
   text-align: center;
-  border-radius: 20px;
-  margin: 20px;
+  color: white;
+  box-sizing: border-box;
 }
 
-/* Heading */
+/* 🌿 Heading */
 #con h1 {
-  font-size: clamp(24px, 5vw, 36px);
-  margin-bottom: 30px;
-  font-weight: 600;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: bold;
+
+  margin-bottom: 40px;
+
+  color: #38bdf8;
   letter-spacing: 1px;
 }
 
-/* Card Container */
-#con > div {
+/* 📦 Cards Container */
+.card-container {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  align-items: stretch;
+
+  gap: 30px;
   flex-wrap: wrap;
 }
 
-/* Card */
+/* 🧊 Card */
 .card {
-  flex: 1 1 280px;
+  width: 100%;
   max-width: 320px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  transition: 0.4s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
 
-  /* Remove ripple/tap effect */
+  border: none;
+  border-radius: 22px;
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+  transition: 0.35s ease;
+
+  color: white;
+
+  /* Remove Ripple Effect */
   -webkit-tap-highlight-color: transparent !important;
   outline: none !important;
   user-select: none;
 }
 
-/* Hover */
+/* ✨ Hover */
 .card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+  transform: translateY(-10px) scale(1.03);
+
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
 }
 
-/* Remove click/focus effect */
+/* 🖼 Card Image */
+.card-img-top {
+  width: 100%;
+  height: 220px;
+
+  object-fit: cover;
+
+  transition: 0.4s ease;
+}
+
+/* Image Hover */
+.card:hover .card-img-top {
+  transform: scale(1.08);
+}
+
+/* 📝 Card Body */
+.card-body {
+  padding: 20px;
+}
+
+/* 🏷 Card Title */
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+
+  margin-bottom: 15px;
+
+  color: #22c55e;
+}
+
+/* 📄 Card Text */
+.card-text {
+  font-size: 15px;
+  line-height: 1.6;
+
+  margin-bottom: 20px;
+
+  color: #e2e8f0;
+}
+
+/* 🔘 Buttons */
+.btn {
+  padding: 10px 22px;
+
+  border: none;
+  border-radius: 30px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+
+  color: white;
+
+  /* Remove Ripple */
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none !important;
+  user-select: none;
+}
+
+/* 🟢 Success Button */
+.btn-success {
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+}
+
+/* 🔵 Primary Button */
+.btn-primary {
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+}
+
+/* ✨ Button Hover */
+.btn:hover {
+  transform: scale(1.06);
+}
+
+/* 🚫 Remove Focus Ripple */
+.btn:focus,
+.btn:active,
 .card:focus,
 .card:active {
   outline: none !important;
@@ -57,64 +154,45 @@
   transform: none !important;
 }
 
-/* Image */
-.card-img-top {
-  width: 100%;
-  height: clamp(220px, 25vw, 180px);
-  object-fit: cover;
-  transition: 0.4s;
-  border-radius: 15px;
-}
-
-.card:hover .card-img-top {
-  transform: scale(1.1);
-}
-
-/* Body */
-.card-body {
-  padding: 15px;
-  flex-grow: 1;
-}
-
-/* Text */
-.card-text {
-  font-size: clamp(13px, 2.5vw, 15px);
-  line-height: 1.5;
-  margin-bottom: 7px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Remove mobile tap highlight globally */
+/* 🌍 Remove Tap Highlight Globally */
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Small Mobile */
-@media (max-width: 480px) {
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
   #con {
-    padding: 15px;
+    padding: 30px 15px;
   }
 
-  #con > div {
-    gap: 20px;
+  .card-container {
+    gap: 25px;
   }
 
   .card {
-    flex: 1 1 100%;
     max-width: 100%;
   }
-}
 
-/* Tablet */
-@media (min-width: 481px) and (max-width: 768px) {
-  .card {
-    flex: 1 1 45%;
+  .card-img-top {
+    height: 200px;
+  }
+
+  .card-title {
+    font-size: 22px;
   }
 }
 
-/* Large Screens */
-@media (min-width: 1024px) {
-  #con > div {
-    gap: 30px;
+/* 📱 Small Mobile */
+@media (max-width: 480px) {
+  #con h1 {
+    font-size: 28px;
+  }
+
+  .card-body {
+    padding: 18px;
+  }
+
+  .btn {
+    width: 100%;
   }
 }
