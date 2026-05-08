@@ -29,9 +29,29 @@ function TreeData() {
     }
   };
 
+  const fetchMoisture = async () => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/moisture`);
+      const text = await res.text();
+      setMoisture(text);
+    } catch (err) {
+      console.log("Moisture fetch issue");
+    }
+  };
+
   useEffect(() => {
     fetchStatus();
+    fetchMoisture();
+
+    // 🔄 Auto refresh moisture every 2 sec
+    const moistureInterval = setInterval(() => {
+      fetchMoisture();
+    }, 2000);
+
+    return () => clearInterval(moistureInterval);
   }, []);
+
+  
 
   const handleClick = async () => {
     setManualLoading(true);
@@ -101,6 +121,10 @@ function TreeData() {
 
         <img className="plantimg" src={plant} alt="plant" />
 
+        <div className="status">
+          🌡 Moisture Level: <span>{moisture}</span>
+        </div>
+        
         <div className="status">
           💧Turn Motor Status: <span>{status}</span>
         </div>
