@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 function TreeData() {
   const [status, setStatus] = useState("ON");
-
+  const [moisture, setMoisture] = useState("--");
   // 🔥 Separate loading states
   const [manualLoading, setManualLoading] = useState(false);
   const [autoLoading, setAutoLoading] = useState(false);
@@ -124,7 +124,7 @@ function TreeData() {
         <div className="status">
           🌡 Moisture Level: <span>{moisture}</span>
         </div>
-        
+
         <div className="status">
           💧Turn Motor Status: <span>{status}</span>
         </div>
