@@ -1,164 +1,249 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import mqtt from "mqtt";
 import "./TreeData.css";
 import plant from "./Image/plant.jpeg";
-import { toast, ToastContainer } from "react-toastify";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TreeData() {
-  const [status, setStatus] = useState("ON");
+
+  // =========================
+  // STATES
+  // =========================
+  const [status, setStatus] = useState("OFF");
   const [moisture, setMoisture] = useState("--");
-  // 🔥 Separate loading states
-  const [manualLoading, setManualLoading] = useState(false);
-  const [autoLoading, setAutoLoading] = useState(false);
-
-  // 🔁 Track AUTO mode
   const [isAuto, setIsAuto] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
 
-  // ⏱ Store interval safely
-  const autoIntervalRef = useRef(null);
+  // MQTT Client Ref
+  const clientRef = useRef(null);
 
-  const BACKEND_URL = "http://192.168.29.34:10000/api/system";
-  // const BACKEND_URL = "http://10.204.161.151:10000/api/system";
-
-  const fetchStatus = async () => {
-    try {
-      const res = await fetch(`${BACKEND_URL}/status`);
-      const text = (await res.text()).trim().toUpperCase();
-      setStatus(text);
-    } catch (err) {
-      console.log("Fetch issue");
-    }
-  };
-
-  const fetchMoisture = async () => {
-    try {
-      const res = await fetch(`${BACKEND_URL}/moisture`);
-      const text = await res.text();
-      setMoisture(text);
-    } catch (err) {
-      console.log("Moisture fetch issue");
-    }
-  };
-
+  // =========================
+  // HIVEMQ CONNECTION
+  // =========================
   useEffect(() => {
-    fetchStatus();
-    fetchMoisture();
 
-    // 🔄 Auto refresh moisture every 2 sec
-    const moistureInterval = setInterval(() => {
-      fetchMoisture();
-    }, 2000);
+    const client = mqtt.connect(
+      "wss://e1deeeb0340c413192f1b542fb15bdc1.s1.eu.hivemq.cloud:8884/mqtt",
+      {
+        username: "ayush",
+        password: "Ayush@123",
 
-    return () => clearInterval(moistureInterval);
-  }, []);
+        protocol: "wss",
 
-  
+        reconnectPeriod: 1000,
+        connectTimeout: 4000,
+        clean: true,
+      }
+    );
 
-  const handleClick = async () => {
-    setManualLoading(true);
+    clientRef.current = client;
 
-    try {
-      const isTurningOn = status !== "ON";
+    // =========================
+    // CONNECT EVENT
+    // =========================
+    client.on("connect", () => {
 
-      const url = isTurningOn
-        ? `${BACKEND_URL}/on`
-        : `${BACKEND_URL}/off`;
+      console.log("Connected to HiveMQ");
 
-      await fetch(url, { method: "POST" });
+      setIsConnected(true);
 
-      setStatus(isTurningOn ? "ON" : "OFF");
+      toast.success("Connected to HiveMQ");
 
-      toast.success(`Motor turned ${isTurningOn ? "OFF" : "ON"}`, {
-        autoClose: 1500,
+      // Subscribe Topics
+      client.subscribe("plant/moisture", (err) => {
+        if (!err) {
+          console.log("Subscribed : plant/moisture");
+        }
       });
 
-    } catch (err) {
-      toast.warning("Failed to connect");
-    } finally {
-      setManualLoading(false);
-    }
-  };
+      client.subscribe("plant/status", (err) => {
+        if (!err) {
+          console.log("Subscribed : plant/status");
+        }
+      });
 
-  const handleAuto = async () => {
-    setAutoLoading(true);
+    });
 
-    try {
-      if (!isAuto) {
-        autoIntervalRef.current = setInterval(() => {
-          fetch(`${BACKEND_URL}/auto`, { method: "POST" });
-        }, 2000);
+    // =========================
+    // MESSAGE EVENT
+    // =========================
+    client.on("message", (topic, message) => {
 
-        setIsAuto(true);
-        toast.success("Auto Mode Enabled", { autoClose: 1500 });
+      const data = message.toString();
 
-      } else {
-        clearInterval(autoIntervalRef.current);
-        autoIntervalRef.current = null;
+      console.log("Topic :", topic);
+      console.log("Message :", data);
 
-        setIsAuto(false);
-        toast.info("Auto Mode Stopped", { autoClose: 1500 });
+      // Moisture Data
+      if (topic === "plant/moisture") {
+        setMoisture(data);
       }
 
-    } catch (err) {
-      toast.warning("Failed to connect");
-    } finally {
-      setAutoLoading(false);
-    }
-  };
+      // Motor Status
+      if (topic === "plant/status") {
+        setStatus(data);
+      }
 
-  // 🧹 CLEANUP (IMPORTANT)
-  useEffect(() => {
+    });
+
+    // =========================
+    // ERROR EVENT
+    // =========================
+    client.on("error", (err) => {
+
+      console.log("MQTT Error :", err);
+
+      toast.error("MQTT Connection Failed");
+
+    });
+
+    // =========================
+    // CLOSE EVENT
+    // =========================
+    client.on("close", () => {
+
+      console.log("Disconnected");
+
+      setIsConnected(false);
+
+      toast.warning("MQTT Disconnected");
+
+    });
+
+    // =========================
+    // CLEANUP
+    // =========================
     return () => {
-      if (autoIntervalRef.current) {
-        clearInterval(autoIntervalRef.current);
+
+      if (client) {
+        client.end();
       }
+
     };
+
   }, []);
 
+  // =========================
+  // MANUAL MOTOR CONTROL
+  // =========================
+  const handleClick = () => {
+
+    if (!clientRef.current || !isConnected) {
+      toast.error("MQTT Not Connected");
+      return;
+    }
+
+    // Toggle State
+    const newState = status === "ON" ? "OFF" : "ON";
+
+    // Publish Message
+    clientRef.current.publish("plant/motor", newState);
+
+    // Update UI
+    setStatus(newState);
+
+    toast.success(`Motor ${newState}`);
+
+  };
+
+  // =========================
+  // AUTO MODE
+  // =========================
+  const handleAuto = () => {
+
+    if (!clientRef.current || !isConnected) {
+      toast.error("MQTT Not Connected");
+      return;
+    }
+
+    if (!isAuto) {
+
+      clientRef.current.publish("plant/auto", "START");
+
+      toast.success("Auto Mode Enabled");
+
+    } else {
+
+      clientRef.current.publish("plant/auto", "STOP");
+
+      toast.info("Auto Mode Disabled");
+
+    }
+
+    setIsAuto(!isAuto);
+
+  };
+
   return (
+
     <div className="container">
+
       <div className="card">
+
         <h2>🌱 Smart Plant System</h2>
 
-        <img className="plantimg" src={plant} alt="plant" />
+        {/* Plant Image */}
+        <img
+          className="plantimg"
+          src={plant}
+          alt="plant"
+        />
 
+        {/* Moisture */}
         <div className="status">
-          🌡 Moisture Level: <span>{moisture}</span>
+          🌡 Moisture Level :
+          <span> {moisture} </span>
         </div>
 
+        {/* Motor Status */}
         <div className="status">
-          💧Turn Motor Status: <span>{status}</span>
+          💧 Motor Status :
+          <span> {status} </span>
         </div>
 
-        {/* 🔘 MANUAL BUTTON */}
+        {/* MQTT Status */}
+        <div className="status">
+          📡 MQTT :
+          <span>
+            {isConnected ? " Connected" : " Disconnected"}
+          </span>
+        </div>
+
+        {/* Manual Button */}
         <button
           onClick={handleClick}
-          disabled={manualLoading || isAuto} // disable if auto running
+          disabled={isAuto || !isConnected}
           className="btn1"
         >
-          {manualLoading
-            ? "Processing..."
-            : status === "ON"
-            ? "Turn ON"
-            : "Turn OFF"}
+          {
+            status === "ON"
+              ? "TURN OFF"
+              : "TURN ON"
+          }
         </button>
 
-        {/* 🔁 AUTO BUTTON */}
+        {/* Auto Button */}
         <button
           onClick={handleAuto}
-          disabled={autoLoading}
+          disabled={!isConnected}
           className="btn2"
         >
-          {autoLoading
-            ? "Processing..."
-            : isAuto
-            ? "STOP AUTO"
-            : "AUTO MODE"}
+          {
+            isAuto
+              ? "STOP AUTO"
+              : "AUTO MODE"
+          }
         </button>
 
       </div>
 
+      {/* Toast */}
       <ToastContainer />
+
     </div>
+
   );
 }
 
