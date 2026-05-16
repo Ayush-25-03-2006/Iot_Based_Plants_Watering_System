@@ -74,7 +74,7 @@ function TreeData() {
 
       setIsConnected(false);
 
-      toast.warning("MQTT Disconnected", {
+      toast.warning("Disconnected", {
         autoClose: 1000
       });
 
