@@ -14,7 +14,6 @@ function App() {
       <Navbar/>
 
       <Routes>
-        <Route path="/Dashboard" element={<Dashboard/>}/>
         <Route path="/" element={<Landing/>}/>
         <Route path="/TreeData" element={<TreeData/>}/>
         <Route path="/Demonstration" element={<Demonstration/>}/>
