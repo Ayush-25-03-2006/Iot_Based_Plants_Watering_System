@@ -5,6 +5,8 @@ import TreeData from "./Components/TreeData";
 import Demonstration from "./Components/Demonstration";
 import CircuitDiagram from "./Components/CircuitDiagram";
 import DetailsPlant from "./Components/DetailsPlant";
+import landing from "./Components/Landing";
+import Landing from "./Components/Landing";
 
 function App() {
   return (
@@ -12,10 +14,11 @@ function App() {
       <Navbar/>
 
       <Routes>
-        <Route path="/" element={<Dashboard/>}/>
+        <Route path="/Dashboard" element={<Dashboard/>}/>
+        <Route path="/" element={<Landing/>}/>
         <Route path="/TreeData" element={<TreeData/>}/>
         <Route path="/Demonstration" element={<Demonstration/>}/>
-        <Route path="Circuit" element={<CircuitDiagram/>}/>
+        <Route path="/Circuit" element={<CircuitDiagram/>}/>
         <Route path="/DetailsPlant" element={<DetailsPlant/>}/>
       </Routes>
     </>

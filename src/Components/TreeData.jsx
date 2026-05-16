@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import mqtt from "mqtt";
+
 import "./TreeData.css";
+
 import plant from "./Image/plant.jpeg";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -8,20 +10,13 @@ import "react-toastify/dist/ReactToastify.css";
 
 function TreeData() {
 
-  // =========================
-  // STATES
-  // =========================
   const [status, setStatus] = useState("OFF");
   const [moisture, setMoisture] = useState("--");
   const [isAuto, setIsAuto] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
 
-  // MQTT Client Ref
   const clientRef = useRef(null);
 
-  // =========================
-  // HIVEMQ CONNECTION
-  // =========================
   useEffect(() => {
 
     const client = mqtt.connect(
@@ -40,206 +35,288 @@ function TreeData() {
 
     clientRef.current = client;
 
-    // =========================
-    // CONNECT EVENT
-    // =========================
     client.on("connect", () => {
 
-      console.log("Connected to HiveMQ");
+      console.log("Connected");
 
       setIsConnected(true);
 
-      toast.success("Connected to HiveMQ");
-
-      // Subscribe Topics
-      client.subscribe("plant/moisture", (err) => {
-        if (!err) {
-          console.log("Subscribed : plant/moisture");
-        }
+      toast.success("Connected To HiveMQ", {
+        autoClose: 1000,
+        transition: null
       });
 
-      client.subscribe("plant/status", (err) => {
-        if (!err) {
-          console.log("Subscribed : plant/status");
-        }
-      });
+      client.subscribe("plant/moisture");
+
+      client.subscribe("plant/status");
 
     });
 
-    // =========================
-    // MESSAGE EVENT
-    // =========================
     client.on("message", (topic, message) => {
 
       const data = message.toString();
 
-      console.log("Topic :", topic);
-      console.log("Message :", data);
-
-      // Moisture Data
       if (topic === "plant/moisture") {
+
         setMoisture(data);
+
       }
 
-      // Motor Status
       if (topic === "plant/status") {
+
         setStatus(data);
+
       }
 
     });
 
-    // =========================
-    // ERROR EVENT
-    // =========================
-    client.on("error", (err) => {
-
-      console.log("MQTT Error :", err);
-
-      toast.error("MQTT Connection Failed");
-
-    });
-
-    // =========================
-    // CLOSE EVENT
-    // =========================
     client.on("close", () => {
-
-      console.log("Disconnected");
 
       setIsConnected(false);
 
-      toast.warning("MQTT Disconnected");
+      toast.warning("MQTT Disconnected", {
+        autoClose: 1000
+      });
 
     });
 
-    // =========================
-    // CLEANUP
-    // =========================
+    client.on("error", () => {
+
+      toast.error("MQTT Connection Failed", {
+        autoClose: 1000
+      });
+
+    });
+
     return () => {
 
       if (client) {
+
         client.end();
+
       }
 
     };
 
   }, []);
 
-  // =========================
-  // MANUAL MOTOR CONTROL
-  // =========================
+  // Manual Control
   const handleClick = () => {
 
     if (!clientRef.current || !isConnected) {
+
       toast.error("MQTT Not Connected");
+
       return;
     }
 
-    // Toggle State
-    const newState = status === "ON" ? "OFF" : "ON";
+    const newState =
+      status === "ON"
+        ? "OFF"
+        : "ON";
 
-    // Publish Message
-    clientRef.current.publish("plant/motor", newState);
+    clientRef.current.publish(
+      "plant/motor",
+      newState
+    );
 
-    // Update UI
     setStatus(newState);
 
     toast.success(`Motor ${newState}`);
 
   };
 
-  // =========================
-  // AUTO MODE
-  // =========================
+  // Auto Mode
   const handleAuto = () => {
 
     if (!clientRef.current || !isConnected) {
-      toast.error("MQTT Not Connected");
+
+      toast.error("MQTT Not Connected", {
+        autoClose: 1000,
+        transition: null
+      });
+
       return;
     }
 
-    if (!isAuto) {
+    if (isAuto) {
 
-      clientRef.current.publish("plant/auto", "START");
+      clientRef.current.publish(
+        "plant/auto",
+        "STOP"
+      );
 
-      toast.success("Auto Mode Enabled");
+      setIsAuto(false);
+
+      toast.info("Auto Mode Disabled", {
+        autoClose: 1000,
+        transition: null
+      });
 
     } else {
 
-      clientRef.current.publish("plant/auto", "STOP");
+      clientRef.current.publish(
+        "plant/auto",
+        "START"
+      );
 
-      toast.info("Auto Mode Disabled");
+      setIsAuto(true);
+
+      toast.success("Auto Mode Enabled", {
+        autoClose: 1000,
+        transition: null
+      });
 
     }
-
-    setIsAuto(!isAuto);
 
   };
 
   return (
 
-    <div className="container">
+    <div className="tree-container">
 
-      <div className="card">
+      {/* Glow */}
+      <div className="bg-glow glow1"></div>
+      <div className="bg-glow glow2"></div>
 
-        <h2>🌱 Smart Plant System</h2>
+      {/* Main Card */}
+      <div className="tree-card">
 
-        {/* Plant Image */}
-        <img
-          className="plantimg"
-          src={plant}
-          alt="plant"
-        />
+        {/* Heading */}
+        <div className="heading-section">
 
-        {/* Moisture */}
-        <div className="status">
-          🌡 Moisture Level :
-          <span> {moisture} </span>
+          <h1>
+            Smart Plant
+            <span> Watering</span>
+          </h1>
+
+          <p>
+            IoT Based Smart Irrigation System
+          </p>
+
         </div>
 
-        {/* Motor Status */}
-        <div className="status">
-          💧 Motor Status :
-          <span> {status} </span>
+        {/* Image */}
+        <div className="image-box">
+
+          <img
+            src={plant}
+            alt="Plant"
+            className="plant-image"
+          />
+
+          <div className="image-overlay"></div>
+
         </div>
 
-        {/* MQTT Status */}
-        <div className="status">
-          📡 MQTT :
-          <span>
-            {isConnected ? " Connected" : " Disconnected"}
-          </span>
+        {/* Status Cards */}
+        <div className="status-wrapper">
+
+          <div className="status-card">
+
+            <div className="status-icon">
+              🌡
+            </div>
+
+            <div>
+
+              <p>Moisture Level</p>
+
+              <h3>{moisture}</h3>
+
+            </div>
+
+          </div>
+
+          <div className="status-card">
+
+            <div className="status-icon">
+              💧
+            </div>
+
+            <div>
+
+              <p>Motor Status</p>
+
+              <h3
+                className={
+                  status === "ON"
+                    ? "green-text"
+                    : "red-text"
+                }
+              >
+                {status}
+              </h3>
+
+            </div>
+
+          </div>
+
+          <div className="status-card">
+
+            <div className="status-icon">
+              📡
+            </div>
+
+            <div>
+
+              <p>Connection</p>
+
+              <h3
+                className={
+                  isConnected
+                    ? "green-text"
+                    : "red-text"
+                }
+              >
+                {
+                  isConnected
+                    ? "Connected"
+                    : "Disconnected"
+                }
+              </h3>
+
+            </div>
+
+          </div>
+
         </div>
 
-        {/* Manual Button */}
-        <button
-          onClick={handleClick}
-          disabled={isAuto || !isConnected}
-          className="btn1"
-        >
-          {
-            status === "ON"
-              ? "TURN OFF"
-              : "TURN ON"
-          }
-        </button>
+        {/* Buttons */}
+        <div className="button-group">
 
-        {/* Auto Button */}
-        <button
-          onClick={handleAuto}
-          disabled={!isConnected}
-          className="btn2"
-        >
-          {
-            isAuto
-              ? "STOP AUTO"
-              : "AUTO MODE"
-          }
-        </button>
+          <button
+            onClick={handleClick}
+            disabled={isAuto || !isConnected}
+            className="manual-btn"
+          >
+
+            {
+              status === "ON"
+                ? "TURN OFF"
+                : "TURN ON"
+            }
+
+          </button>
+
+          <button
+            onClick={handleAuto}
+            disabled={!isConnected}
+            className="auto-btn"
+          >
+
+            {
+              isAuto
+                ? "STOP AUTO"
+                : "AUTO MODE"
+            }
+
+          </button>
+
+        </div>
 
       </div>
 
-      {/* Toast */}
       <ToastContainer />
 
     </div>

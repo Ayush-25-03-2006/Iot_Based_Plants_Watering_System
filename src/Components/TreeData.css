@@ -1,168 +1,375 @@
-/* 🌌 Main Container */
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* TreeData.css */
 
-  background: linear-gradient(135deg, #0f172a, #020617);
-  padding: 20px;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 🧊 Card */
-.card {
-  width: 100%;
-  max-width: 360px;
-
-  padding: 25px;
-  border-radius: 22px;
-
-  text-align: center;
-  color: white;
-
-  backdrop-filter: blur(14px);
-  background: linear-gradient(90deg, #27b22e47, #28b12f45);
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-
-  transition: 0.3s ease;
-
-  /* Remove ripple/tap effect */
-  -webkit-tap-highlight-color: transparent !important;
-  user-select: none;
+body{
+    font-family: 'Poppins', sans-serif;
+    background: #020617;
+    overflow-x: hidden;
 }
 
-/* ✨ Card Hover */
-.card:hover {
-  transform: translateY(-5px);
-}
+/* Main Container */
+.tree-container{
+    position: relative;
 
-/* 🌱 Heading */
-.card h2 {
-  margin-bottom: 20px;
-  font-size: clamp(22px, 5vw, 28px);
-  font-weight: bold;
-  color: #ffffff;
-}
-
-/* 🌿 Plant Image */
-.plantimg {
-  width: 100%;
-  height: 220px;
-
-  object-fit: cover;
-  border-radius: 18px;
-
-  margin-bottom: 20px;
-
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.4);
-}
-
-/* 📊 Status Section */
-.status {
-  margin: 15px 0;
-  font-size: 17px;
-  color: #f8fafc;
-}
-
-/* Status Value */
-.status span {
-  font-weight: bold;
-  color: #22c55e;
-  font-size: 18px;
-}
-
-/* 🔘 Common Button Style */
-/* 🔘 Common Button Style */
-.btn1,
-.btn2 {
-  width: 80%;
-
-  margin-top: 15px;
-  padding: 12px 20px;
-
-  border: none;
-  border-radius: 30px;
-
-  cursor: pointer;
-
-  font-size: 16px;
-  font-weight: 600;
-
-  transition: 0.3s ease;
-
-  color: white;
-
-  /* ✅ Perfect Center */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-inline: auto;
-}
-
-/* 🟢 Manual Button */
-.btn1 {
-  background: linear-gradient(90deg, #1e7aaf, #a81288);
-  box-shadow: 0 0 15px rgba(30, 122, 175, 0.7);
-}
-
-/* 🤖 Auto Button */
-.btn2 {
-  background: linear-gradient(120deg, #4c5681, #1eaf64);
-  box-shadow: 0 0 15px rgba(34, 197, 189, 0.7);
-}
-
-/* ✨ Hover */
-.btn1:hover,
-.btn2:hover {
-  transform: scale(1.05);
-}
-
-/* 🚫 Disabled Button */
-.btn1:disabled,
-.btn2:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* ❌ Remove Focus & Click Effect */
-.btn1:focus,
-.btn1:active,
-.btn2:focus,
-.btn2:active,
-.card:focus,
-.card:active {
-  outline: none !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-/* Remove Tap Highlight Globally */
-* {
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* 📱 Mobile Responsive */
-@media (max-width: 480px) {
-  .card {
-    padding: 20px;
-    border-radius: 18px;
-  }
-
-  .plantimg {
-    height: 200px;
-  }
-
-  .btn1,
-  .btn2 {
     width: 100%;
-    font-size: 15px;
-  }
+    min-height: 100vh;
 
-  .status {
-    font-size: 15px;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+
+    overflow: hidden;
+
+    background:
+    linear-gradient(
+        to bottom right,
+        #020617,
+        #0f172a,
+        #111827
+    );
+}
+
+/* Background Glow */
+.bg-glow{
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    opacity: 0.25;
+}
+
+.glow1{
+    width: 300px;
+    height: 300px;
+
+    background: #22c55e;
+
+    top: -80px;
+    left: -80px;
+}
+
+.glow2{
+    width: 350px;
+    height: 350px;
+
+    background: #3b82f6;
+
+    bottom: -100px;
+    right: -100px;
+}
+
+/* Main Card */
+.tree-card{
+    position: relative;
+
+    width: 430px;
+
+    padding: 30px;
+
+    border-radius: 35px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+    0 10px 40px rgba(0,0,0,0.45);
+
+    animation: fadeUp 1s ease;
+}
+
+/* Heading */
+.heading-section{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.heading-section h1{
+    font-size: 42px;
+    font-weight: 700;
+    color: white;
+}
+
+.heading-section span{
+    background:
+    linear-gradient(to right,
+    #22c55e,
+    #3b82f6);
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+.heading-section p{
+    margin-top: 10px;
+
+    color: #cbd5e1;
+
+    font-size: 16px;
+}
+
+/* Image */
+.image-box{
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 28px;
+
+    margin-bottom: 25px;
+}
+
+.plant-image{
+    width: 100%;
+
+    height: 250px;
+
+    object-fit: cover;
+
+    transition: 0.6s;
+}
+
+.image-box:hover .plant-image{
+    transform: scale(1.06);
+}
+
+.image-overlay{
+    position: absolute;
+
+    inset: 0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.45),
+        transparent
+    );
+}
+
+/* Status Wrapper */
+.status-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Status Card */
+.status-card{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    transition: 0.4s;
+}
+
+.status-card:hover{
+    transform: translateY(-4px);
+
+    background: rgba(255,255,255,0.08);
+}
+
+/* Icon */
+.status-icon{
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 18px;
+
+    font-size: 24px;
+
+    background:
+    linear-gradient(
+        to bottom right,
+        rgba(34,197,94,0.18),
+        rgba(59,130,246,0.18)
+    );
+}
+
+/* Status Text */
+.status-card p{
+    color: #94a3b8;
+
+    font-size: 14px;
+}
+
+.status-card h3{
+    margin-top: 4px;
+
+    color: white;
+
+    font-size: 20px;
+}
+
+/* Colors */
+.green-text{
+    color: #22c55e !important;
+}
+
+.red-text{
+    color: #ef4444 !important;
+}
+
+/* Buttons */
+.button-group{
+    margin-top: 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+/* Buttons */
+.manual-btn,
+.auto-btn{
+    position: relative;
+
+    overflow: hidden;
+
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.4s;
+}
+
+/* Manual */
+.manual-btn{
+    background:
+    linear-gradient(
+        to right,
+        #22c55e,
+        #16a34a
+    );
+
+    box-shadow:
+    0 10px 25px rgba(34,197,94,0.25);
+}
+
+/* Auto */
+.auto-btn{
+    background:
+    linear-gradient(
+        to right,
+        #3b82f6,
+        #2563eb
+    );
+
+    box-shadow:
+    0 10px 25px rgba(59,130,246,0.25);
+}
+
+/* Hover */
+.manual-btn:hover,
+.auto-btn:hover{
+    transform: translateY(-4px);
+}
+
+/* Shine Effect */
+.manual-btn::before,
+.auto-btn::before{
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+    rgba(255,255,255,0.2);
+
+    transform: skewX(-25deg);
+
+    transition: 0.7s;
+}
+
+.manual-btn:hover::before,
+.auto-btn:hover::before{
+    left: 120%;
+}
+
+/* Disabled */
+.manual-btn:disabled,
+.auto-btn:disabled{
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+/* Animation */
+@keyframes fadeUp{
+
+    from{
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* Responsive */
+@media(max-width: 500px){
+
+    .tree-card{
+        width: 100%;
+        padding: 22px;
+    }
+
+    .heading-section h1{
+        font-size: 32px;
+    }
+
+    .status-card{
+        padding: 15px;
+    }
+
 }

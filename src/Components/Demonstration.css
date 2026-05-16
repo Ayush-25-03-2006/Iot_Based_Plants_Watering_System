@@ -1,144 +1,457 @@
-/* 🌌 Page Background */
-body {
-  margin: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #0f172a, #020617);
-  color: white;
+/* Demonstration.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* 🔥 Title */
-.demo-title {
-  text-align: center;
-  margin: 30px 10px;
-
-  font-size: clamp(24px, 5vw, 36px);
-  font-weight: bold;
-
-  color: #38bdf8;
-  line-height: 1.5;
-  letter-spacing: 1px;
+body{
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+    background: #020617;
 }
 
-/* 📦 Row Layout */
-.row {
-  display: grid !important;
-  grid-template-columns: repeat(2, 1fr);
+/* Main Container */
+.demo-container{
+    position: relative;
 
-  gap: 25px;
-  padding: 20px;
+    width: 100%;
+    min-height: 100vh;
 
-  justify-items: center;
+    padding: 100px 8%;
+
+    overflow: hidden;
+
+    background:
+    linear-gradient(
+        to bottom right,
+        #020617,
+        #0f172a,
+        #111827
+    );
 }
 
-/* 📱 Mobile Responsive */
-@media (max-width: 768px) {
-  .row {
-    grid-template-columns: 1fr;
-  }
+/* Glow Effects */
+.bg-glow{
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(120px);
+
+    opacity: 0.18;
 }
 
-/* 🎬 Demo Card */
-.demo-card {
-  width: 100%;
-  max-width: 400px;
+.glow1{
+    width: 350px;
+    height: 350px;
 
-  border-radius: 22px;
-  overflow: hidden;
+    background: #22c55e;
 
-  border: 1px solid rgba(255,255,255,0.1);
-
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(14px);
-
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-
-  transition: 0.35s ease;
-
-  /* Remove Ripple Effect */
-  -webkit-tap-highlight-color: transparent !important;
-  outline: none !important;
-  user-select: none;
+    top: -120px;
+    left: -120px;
 }
 
-/* ✨ Hover Effect */
-.demo-card:hover {
-  transform: translateY(-8px) scale(1.02);
+.glow2{
+    width: 400px;
+    height: 400px;
 
-  box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+    background: #3b82f6;
+
+    bottom: -150px;
+    right: -120px;
 }
 
-/* 🎥 Video */
-.demo-video {
-  width: 100%;
-  height: clamp(200px, 25vw, 240px);
+/* Hero Section */
+.hero-section{
+    text-align: center;
 
-  object-fit: cover;
+    margin-bottom: 90px;
 
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
 
-  filter: brightness(0.92) contrast(1.05);
+    z-index: 2;
+
+    animation: fadeDown 1s ease;
 }
 
-/* 📝 Card Body */
-.card-body {
-  padding: 18px;
-  text-align: center;
+/* Badge */
+.hero-badge{
+    display: inline-block;
+
+    padding: 12px 24px;
+
+    border-radius: 40px;
+
+    background:
+    rgba(34,197,94,0.12);
+
+    border:
+    1px solid rgba(34,197,94,0.25);
+
+    color: #22c55e;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    margin-bottom: 30px;
+
+    backdrop-filter: blur(10px);
 }
 
-/* 🏷 Card Title */
-.card-title {
-  font-size: clamp(18px, 3vw, 22px);
-  font-weight: bold;
+/* Heading */
+.hero-section h1{
+    font-size: 75px;
 
-  color: #22c55e;
+    line-height: 1.1;
 
-  margin-bottom: 10px;
+    font-weight: 700;
+
+    color: white;
 }
 
-/* 📄 Card Text */
-.card-text {
-  font-size: clamp(13px, 2vw, 15px);
+.hero-section h1 span{
+    background:
+    linear-gradient(
+        to right,
+        #22c55e,
+        #3b82f6
+    );
 
-  color: #e2e8f0;
-  line-height: 1.6;
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
 }
 
-/* 🚫 Remove Focus & Click Ripple */
-.demo-card:focus,
-.demo-card:active,
-.demo-video:focus,
-.demo-video:active,
-video:focus,
-video:active {
-  outline: none !important;
-  box-shadow: none !important;
+/* Paragraph */
+.hero-section p{
+    margin-top: 30px;
+
+    color: #cbd5e1;
+
+    font-size: 20px;
+
+    line-height: 1.9;
+
+    max-width: 850px;
+
+    margin-inline: auto;
 }
 
-/* 🌍 Remove Tap Highlight Globally */
-* {
-  -webkit-tap-highlight-color: transparent;
+/* Cards Grid */
+.cards-grid{
+    display: grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap: 35px;
+
+    position: relative;
+
+    z-index: 2;
 }
 
-/* 📱 Small Mobile */
-@media (max-width: 480px) {
-  .demo-title {
-    font-size: 24px;
-  }
+/* Demo Card */
+.demo-card{
+    position: relative;
 
-  .row {
-    gap: 20px;
-    padding: 15px;
-  }
+    overflow: hidden;
 
-  .demo-card {
-    border-radius: 18px;
-  }
+    border-radius: 30px;
 
-  .demo-video {
-    height: 200px;
-  }
+    background:
+    rgba(255,255,255,0.05);
 
-  .card-body {
-    padding: 15px;
-  }
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(16px);
+
+    transition: 0.5s;
+
+    animation: fadeUp 1s ease;
+}
+
+.demo-card:hover{
+    transform:
+    translateY(-12px);
+
+    box-shadow:
+    0 25px 50px rgba(34,197,94,0.18);
+}
+
+/* Icon Box */
+.icon-box{
+    width: 85px;
+    height: 85px;
+
+    margin: 30px auto 20px;
+
+    border-radius: 24px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 38px;
+
+    background:
+    linear-gradient(
+        to bottom right,
+        rgba(34,197,94,0.18),
+        rgba(59,130,246,0.18)
+    );
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.25);
+
+    transition: 0.4s;
+}
+
+.demo-card:hover .icon-box{
+    transform: scale(1.08);
+}
+
+/* Card Content */
+.card-content{
+    padding: 0 30px 35px;
+}
+
+.card-content h3{
+    text-align: center;
+
+    color: white;
+
+    font-size: 28px;
+
+    margin-bottom: 18px;
+}
+
+.card-content p{
+    color: #cbd5e1;
+
+    text-align: center;
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+/* Video */
+.demo-video{
+    width: 100%;
+
+    margin-top: 28px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.3);
+
+    transition: 0.4s;
+}
+
+.demo-video:hover{
+    transform: scale(1.02);
+}
+
+/* Button */
+.view-btn{
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background:
+    linear-gradient(
+        to right,
+        #22c55e,
+        #3b82f6
+    );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.4s;
+
+    box-shadow:
+    0 10px 25px rgba(34,197,94,0.2);
+}
+
+.view-btn:hover{
+    transform: translateY(-4px);
+
+    box-shadow:
+    0 15px 30px rgba(59,130,246,0.28);
+}
+
+/* Feature Section */
+.feature-section{
+    margin-top: 130px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.feature-section h2{
+    text-align: center;
+
+    color: white;
+
+    font-size: 52px;
+
+    margin-bottom: 60px;
+}
+
+/* Feature Grid */
+.feature-grid{
+    display: grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap: 30px;
+}
+
+/* Feature Box */
+.feature-box{
+    padding: 40px 30px;
+
+    border-radius: 28px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(14px);
+
+    transition: 0.5s;
+}
+
+.feature-box:hover{
+    transform:
+    translateY(-10px);
+
+    box-shadow:
+    0 20px 45px rgba(59,130,246,0.16);
+}
+
+.feature-box h3{
+    color: white;
+
+    font-size: 28px;
+
+    margin-bottom: 18px;
+}
+
+.feature-box p{
+    color: #cbd5e1;
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+/* Animations */
+@keyframes fadeUp{
+
+    from{
+        opacity: 0;
+        transform: translateY(60px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes fadeDown{
+
+    from{
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* Responsive */
+@media(max-width: 1100px){
+
+    .hero-section h1{
+        font-size: 58px;
+    }
+
+}
+
+@media(max-width: 768px){
+
+    .demo-container{
+        padding: 80px 5%;
+    }
+
+    .hero-section h1{
+        font-size: 42px;
+    }
+
+    .hero-section p{
+        font-size: 17px;
+    }
+
+    .feature-section h2{
+        font-size: 38px;
+    }
+
+}
+
+@media(max-width: 500px){
+
+    .hero-section h1{
+        font-size: 34px;
+    }
+
+    .hero-badge{
+        font-size: 13px;
+    }
+
+    .card-content{
+        padding: 0 20px 28px;
+    }
+
+    .card-content h3{
+        font-size: 22px;
+    }
+
 }

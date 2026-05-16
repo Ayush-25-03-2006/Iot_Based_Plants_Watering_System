@@ -1,3 +1,5 @@
+import React from "react";
+
 import relay from "./Image/relay.jpeg";
 import motor from "./Image/motorwithpump.jpeg";
 import all1 from "./Image/nodemcurelay.jpeg";
@@ -6,95 +8,151 @@ import all3 from "./Image/allcircuit.jpeg";
 import soilinterface from "./Image/interfacesoil.jpeg";
 import soil from "./Image/soilmoisture.jpeg";
 import circuit from "./Image/circuitdiagramimage.png";
+import Full_Image from "./Image/iotplant.jpeg";
 
 import "./CircuitDiagram.css";
-function CircuitDiagram() {
-    return (
-        <>
-            <div className="card-group">
-                <hr className="hr" />
-                <h3 style={{ color: "white" }}>Components Used</h3>
-                <hr className="hr" />
-                <div className="card">
-                    <img src={relay} className="card-img-top" alt="Relay" />
-                    <div className="card-body">
-                        <h5 className="card-title">Relay</h5>
-                        <p className="card-text">
-                            A relay module used to control high voltage devices through low voltage signals.
-                        </p>
-                    </div>
-                </div>
-                <div className="card">
-                    <img src={motor} className="card-img-top" alt="Motor" />
-                    <div className="card-body">
-                        <h5 className="card-title">Motor</h5>
-                        <p className="card-text">
-                            A water pump motor used to supply water in the irrigation system.
-                        </p>
-                    </div>
-                </div>
-                <div className="card">
-                    <img src={all1} className="card-img-top" alt="NodeMCURelay" />
-                    <div className="card-body">
-                        <h5 className="card-title">NodeMCU & Relay</h5>
-                        <p className="card-text">
-                            Connection setup showing how NodeMCU interfaces with the relay module.
-                        </p>
-                    </div>
-                </div>
-                <div className="card">
-                    <img src={all2} className="card-img-top" alt="NodeMCURelayMotor" />
-                    <div className="card-body">
-                        <h5 className="card-title">NodeMCU, Relay & Motor</h5>
-                        <p className="card-text">
-                            Integrated setup of NodeMCU, relay, and motor for automated control.
-                        </p>
-                    </div>
-                </div>
-                <div className="card">
-                    <img src={all3} className="card-img-top" alt="Full Circuit" />
-                    <div className="card-body">
-                        <h5 className="card-title">Full Circuit</h5>
-                        <p className="card-text">
-                            Complete circuit diagram including NodeMCU, relay, motor, and sensor connections.
-                        </p>
-                    </div>
-                </div>
-                <div className="card">
-                    <img src={soilinterface} className="card-img-top" alt="Soil Moisture Interface" />
-                    <div className="card-body">
-                        <h5 className="card-title">Soil Moisture Interface</h5>
-                        <p className="card-text">
-                            Interface module that processes signals from the soil moisture sensor.
-                        </p>
-                    </div>
-                </div>
-                <div className="card">
-                    <img src={soil} className="card-img-top" alt="Soil Moisture" />
-                    <div className="card-body">
-                        <h5 className="card-title">Soil Moisture</h5>
-                        <p className="card-text">
-                            Soil moisture sensor used to detect water levels in the soil for automation.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div className="card-group">
-                <hr className="hr" />
-                <h3 style={{ color: "white" }}>Diagramatic Representation Of Circuit</h3>
-                <hr className="hr" />
-                <div className="cards" style={{ alignItems: "center", alignContent: "center" }}>
-                    <img src={circuit} className="card-img-top" alt="Soil Moisture" />
-                    <div className="card-body">
-                        <h5 className="card-title">Circuit Diagram</h5>
-                        <p className="card-text">
-                            Soil moisture sensor used to detect water levels in the soil for automation.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </>
 
-    )
+function CircuitDiagram() {
+
+    const components = [
+        {
+            image: relay,
+            title: "Relay Module",
+            desc: "Controls high voltage devices using low voltage NodeMCU signals."
+        },
+        {
+            image: motor,
+            title: "Water Pump Motor",
+            desc: "Supplies water automatically for irrigation and plant hydration."
+        },
+        {
+            image: all1,
+            title: "NodeMCU + Relay",
+            desc: "NodeMCU connected with relay module for smart automation."
+        },
+        {
+            image: all2,
+            title: "Integrated Setup",
+            desc: "Complete setup connecting NodeMCU, relay and water pump."
+        },
+        {
+            image: all3,
+            title: "Complete Circuit",
+            desc: "Entire irrigation circuit including sensor, relay and motor."
+        },
+        {
+            image: soilinterface,
+            title: "Sensor Interface",
+            desc: "Processes soil moisture sensor signals for automation logic."
+        },
+        {
+            image: soil,
+            title: "Soil Moisture Sensor",
+            desc: "Detects soil water level and activates automatic watering."
+        },
+        {
+            image: Full_Image,
+            title: "Full Diagram",
+            desc: "True Diagramatic Representation."
+        }
+
+    ];
+
+    return (
+
+        <div className="main-container">
+
+            {/* Hero */}
+            <div className="hero-section">
+
+                <h1>
+                    Smart IoT Plant Watering System
+                </h1>
+
+                <p>
+                    Intelligent irrigation automation using ESP8266,
+                    MQTT cloud communication and real-time soil monitoring.
+                </p>
+
+            </div>
+
+            {/* Components */}
+            <div className="section-title">
+
+                <span></span>
+
+                <h2>Components Used</h2>
+
+                <span></span>
+
+            </div>
+
+            <div className="card-grid">
+
+                {
+                    components.map((item, index) => (
+
+                        <div className="modern-card" key={index}>
+
+                            <div className="image-container">
+
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                />
+
+                            </div>
+
+                            <div className="card-content">
+
+                                <h3>{item.title}</h3>
+
+                                <p>{item.desc}</p>
+
+                            </div>
+
+                        </div>
+
+                    ))
+                }
+
+            </div>
+
+            {/* Circuit Diagram */}
+            <div className="section-title">
+
+                <span></span>
+
+                <h2>Circuit Diagram Representation</h2>
+
+                <span></span>
+
+            </div>
+
+            <div className="diagram-card">
+
+                <img
+                    src={circuit}
+                    alt="Circuit Diagram"
+                />
+
+                <div className="diagram-content">
+
+                    <h3>Complete Circuit Architecture</h3>
+
+                    <p>
+                        Full schematic representation of the Smart Plant
+                        Watering System including NodeMCU, relay module,
+                        moisture sensor and water pump integration.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    );
 }
+
 export default CircuitDiagram;
