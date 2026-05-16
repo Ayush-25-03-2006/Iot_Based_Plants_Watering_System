@@ -41,7 +41,7 @@ function TreeData() {
 
       setIsConnected(true);
 
-      toast.success("Connected To HiveMQ", {
+      toast.success("Connected", {
         autoClose: 1000,
         transition: null
       });
