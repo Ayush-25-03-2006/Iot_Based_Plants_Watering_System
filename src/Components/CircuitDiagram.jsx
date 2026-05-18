@@ -2,7 +2,7 @@ import React from "react";
 
 import relay from "./Image/relay.jpeg";
 import motor from "./Image/motorwithpump.jpeg";
-import all1 from "./Image/nodemcurelay.jpeg";
+import all1 from "./Image/nodemcu_relay.jpeg";
 import all2 from "./Image/motornodemcurelay.jpeg";
 import all3 from "./Image/allcircuit.jpeg";
 import soilinterface from "./Image/interfacesoil.jpeg";
