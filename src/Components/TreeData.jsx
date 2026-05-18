@@ -105,7 +105,7 @@ function TreeData() {
 
     if (!clientRef.current || !isConnected) {
 
-      toast.error("Not Connected");
+      toast.error("Not Connected",{autoClose:1000});
 
       return;
     }
