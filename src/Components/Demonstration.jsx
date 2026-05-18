@@ -4,8 +4,8 @@ import "./Demonstration.css";
 
 import mqttVideo from "./Video/mqtt.mp4";
 import iotvideo from "./Video/iotvideo.mp4";
-import Video1 from "./Video/1stvideo.mp4";
-import video2 from "./Video/2ndvideo.mp4";
+import Video1 from "./Video/irrigation.mp4";
+import video2 from "./Video/assemble_iot.mp4";
 
 function Demonstration() {
 

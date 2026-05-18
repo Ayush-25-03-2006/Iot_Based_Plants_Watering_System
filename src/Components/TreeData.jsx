@@ -82,7 +82,7 @@ function TreeData() {
 
     client.on("error", () => {
 
-      toast.error("MQTT Connection Failed", {
+      toast.error("Connection Failed", {
         autoClose: 1000
       });
 
@@ -105,7 +105,7 @@ function TreeData() {
 
     if (!clientRef.current || !isConnected) {
 
-      toast.error("MQTT Not Connected");
+      toast.error("Not Connected");
 
       return;
     }
@@ -131,7 +131,7 @@ function TreeData() {
 
     if (!clientRef.current || !isConnected) {
 
-      toast.error("MQTT Not Connected", {
+      toast.error("Not Connected", {
         autoClose: 1000,
         transition: null
       });
