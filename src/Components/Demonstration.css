@@ -126,6 +126,14 @@ body{
 
     -webkit-text-fill-color: transparent;
 }
+.demo-video {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 15px;
+  background: #000;
+}
 
 /* Paragraph */
 .hero-section p{
