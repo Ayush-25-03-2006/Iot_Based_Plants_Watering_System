@@ -219,25 +219,16 @@ function TreeData() {
             </div>
 
             <div>
-
               <p>Moisture Level</p>
-
               <h3>{moisture}</h3>
-
             </div>
-
           </div>
-
           <div className="status-card">
-
             <div className="status-icon">
-              💧
+                           💧
             </div>
-
             <div>
-
               <p>Motor Status</p>
-
               <h3
                 className={
                   status === "ON"
@@ -246,22 +237,15 @@ function TreeData() {
                 }
               >
                 {status}
-              </h3>
-
+               </h3>
             </div>
-
           </div>
-
           <div className="status-card">
-
             <div className="status-icon">
               📡
             </div>
-
             <div>
-
               <p>Connection</p>
-
               <h3
                 className={
                   isConnected
@@ -275,52 +259,32 @@ function TreeData() {
                     : "Disconnected"
                 }
               </h3>
-
             </div>
-
           </div>
-
         </div>
-
-        {/* Buttons */}
         <div className="button-group">
-
           <button
             onClick={handleClick}
-            disabled={isAuto || !isConnected}
             className="manual-btn"
           >
-
             {
               status === "ON"
                 ? "TURN OFF"
                 : "TURN ON"
             }
-
           </button>
-
           <button
             onClick={handleAuto}
-            disabled={!isConnected}
             className="auto-btn"
           >
-
             {
-              isAuto
-                ? "STOP AUTO"
-                : "AUTO MODE"
+               "AUTO MODE"
             }
-
           </button>
-
         </div>
-
       </div>
-
       <ToastContainer />
-
     </div>
-
   );
 }
 
