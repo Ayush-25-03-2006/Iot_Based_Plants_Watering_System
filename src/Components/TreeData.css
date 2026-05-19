@@ -373,3 +373,49 @@ body{
     }
 
 }
+
+/* Accordion Main */
+.accordion {
+  margin-top: 30px;
+  padding: 20px;
+}
+
+/* Accordion Item */
+.accordion-item {
+  background: rgba(20, 20, 35, 0.9) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  margin-bottom: 15px;
+  border-radius: 15px !important;
+  overflow: hidden;
+}
+
+/* Accordion Button */
+.accordion-button {
+  background: rgba(20, 20, 35, 0.95) !important;
+  color: white !important;
+  font-weight: 600;
+  box-shadow: none !important;
+}
+
+/* When Open */
+.accordion-button:not(.collapsed) {
+  background: rgba(30, 30, 50, 1) !important;
+  color: #00ffae !important;
+}
+
+/* Remove Bootstrap Arrow Background */
+.accordion-button::after {
+  filter: brightness(0) invert(1);
+}
+
+/* Accordion Body */
+.accordion-body {
+  background: rgba(15, 15, 25, 0.95);
+  color: white !important;
+  line-height: 1.8;
+}
+
+/* Remove Border Line */
+.accordion-flush .accordion-item {
+  border: none;
+}

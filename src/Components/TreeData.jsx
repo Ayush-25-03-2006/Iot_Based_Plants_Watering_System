@@ -105,7 +105,7 @@ function TreeData() {
 
     if (!clientRef.current || !isConnected) {
 
-      toast.error("Not Connected",{autoClose:1000});
+      toast.error("Not Connected", { autoClose: 1000 });
 
       return;
     }
@@ -172,119 +172,155 @@ function TreeData() {
   };
 
   return (
+    <>
+      <div className="tree-container">
 
-    <div className="tree-container">
+        {/* Glow */}
+        <div className="bg-glow glow1"></div>
+        <div className="bg-glow glow2"></div>
 
-      {/* Glow */}
-      <div className="bg-glow glow1"></div>
-      <div className="bg-glow glow2"></div>
+        {/* Main Card */}
+        <div className="tree-card">
 
-      {/* Main Card */}
-      <div className="tree-card">
+          {/* Heading */}
+          <div className="heading-section">
 
-        {/* Heading */}
-        <div className="heading-section">
+            <h1>
+              Smart Plant
+              <span> Watering</span>
+            </h1>
 
-          <h1>
-            Smart Plant
-            <span> Watering</span>
-          </h1>
+            <p>
+              IoT Based Smart Irrigation System
+            </p>
 
-          <p>
-            IoT Based Smart Irrigation System
-          </p>
+          </div>
 
-        </div>
+          {/* Image */}
+          <div className="image-box">
 
-        {/* Image */}
-        <div className="image-box">
+            <img
+              src={plant}
+              alt="Plant"
+              className="plant-image"
+            />
 
-          <img
-            src={plant}
-            alt="Plant"
-            className="plant-image"
-          />
+            <div className="image-overlay"></div>
 
-          <div className="image-overlay"></div>
+          </div>
 
-        </div>
+          {/* Status Cards */}
+          <div className="status-wrapper">
 
-        {/* Status Cards */}
-        <div className="status-wrapper">
+            <div className="status-card">
 
-          <div className="status-card">
+              <div className="status-icon">
+                🌡
+              </div>
 
-            <div className="status-icon">
-              🌡
+              <div>
+                <p>Moisture Level</p>
+                <h3>{moisture}</h3>
+              </div>
             </div>
-
-            <div>
-              <p>Moisture Level</p>
-              <h3>{moisture}</h3>
+            <div className="status-card">
+              <div className="status-icon">
+                💧
+              </div>
+              <div>
+                <p>Motor Status</p>
+                <h3
+                  className={
+                    status === "ON"
+                      ? "green-text"
+                      : "red-text"
+                  }
+                >
+                  {status}
+                </h3>
+              </div>
+            </div>
+            <div className="status-card">
+              <div className="status-icon">
+                📡
+              </div>
+              <div>
+                <p>Connection</p>
+                <h3
+                  className={
+                    isConnected
+                      ? "green-text"
+                      : "red-text"
+                  }
+                >
+                  {
+                    isConnected
+                      ? "Connected"
+                      : "Disconnected"
+                  }
+                </h3>
+              </div>
             </div>
           </div>
-          <div className="status-card">
-            <div className="status-icon">
-                           💧
-            </div>
-            <div>
-              <p>Motor Status</p>
-              <h3
-                className={
-                  status === "ON"
-                    ? "green-text"
-                    : "red-text"
-                }
-              >
-                {status}
-               </h3>
-            </div>
+          <div className="button-group">
+            <button
+              onClick={handleClick}
+              className="manual-btn"
+            >
+              {
+                status === "ON"
+                  ? "TURN OFF"
+                  : "TURN ON"
+              }
+            </button>
+            <button
+              onClick={handleAuto}
+              className="auto-btn"
+            >
+              {
+                "AUTO MODE"
+              }
+            </button>
           </div>
-          <div className="status-card">
-            <div className="status-icon">
-              📡
-            </div>
-            <div>
-              <p>Connection</p>
-              <h3
-                className={
-                  isConnected
-                    ? "green-text"
-                    : "red-text"
-                }
-              >
-                {
-                  isConnected
-                    ? "Connected"
-                    : "Disconnected"
-                }
-              </h3>
+        </div>
+        <ToastContainer />
+      </div>
+      <div className="accordion accordion-flush" id="accordionFlushExample">
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              About Soil Moisture Level
+            </button>
+          </h2>
+          <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div className="accordion-body">1. if moisture level shows [600 to 949] (means Plant Need Water) you can manually water the plant or click the auto mode the pump will automatically perform the work.
+              <br />
+              <br />
+              2. soil moisture value shows from [0 - 1024]
+              <br /><br />
+              3. value from [950 - 1024] means the soil moisture is not plug in to the soil (i.e in Air). 
+              <br /><br />
+              4. value from [0 - 599] means the soil is wet no need to water your plant.
             </div>
           </div>
         </div>
-        <div className="button-group">
-          <button
-            onClick={handleClick}
-            className="manual-btn"
-          >
-            {
-              status === "ON"
-                ? "TURN OFF"
-                : "TURN ON"
-            }
-          </button>
-          <button
-            onClick={handleAuto}
-            className="auto-btn"
-          >
-            {
-               "AUTO MODE"
-            }
-          </button>
+        <div className="accordion-item">
+          <h2 className="accordion-header" id="flush-headingTwo">
+            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              About Connection
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div className="accordion-body">1. The mqtt protocol will be connected with the springboot application (backend).
+              <br /><br />
+              2. springboot will perform connection with the react (frontend).
+              <br /><br />
+              3. Now, because of mqtt we can access the system from anywhere around the world.
+            </div>
+          </div>
         </div>
       </div>
-      <ToastContainer />
-    </div>
+    </>
   );
 }
 
