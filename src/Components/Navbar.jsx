@@ -35,7 +35,7 @@ function Navbar() {
                     ></i>
 
                     <span>
-                        IOT Plant Watering
+                        IOT Based Plant Watering
                     </span>
 
                 </Link>
