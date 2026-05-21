@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import "./Demonstration.css";
 
@@ -10,6 +10,10 @@ import video2 from "./Video/assemble_iot.mp4";
 function Demonstration() {
 
   const videoRefs = useRef({});
+
+  useEffect(() => {
+      document.title = "Demonstration";
+    },[])
 
   // Fullscreen Function
   const openFullscreen = (id) => {

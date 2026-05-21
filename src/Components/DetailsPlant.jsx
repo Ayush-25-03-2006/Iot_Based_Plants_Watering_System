@@ -1,5 +1,10 @@
+import { useEffect } from "react";
 import "./DetailsPlant.css";
 function DetailsPlant() {
+
+        useEffect(() => {
+            document.title = "Plant Care"
+        },[])
         const guideData = [
             {
                 topic: "Watering",

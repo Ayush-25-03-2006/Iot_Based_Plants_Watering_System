@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useEffect } from "react";
 import relay from "./Image/relay.jpeg";
 import motor from "./Image/motorwithpump.jpeg";
 import all1 from "./Image/nodemcu_relay.jpeg";
@@ -13,6 +13,10 @@ import Full_Image from "./Image/iotplant.jpeg";
 import "./CircuitDiagram.css";
 
 function CircuitDiagram() {
+
+    useEffect(() => {
+        document.title = "Circuit Diagram";
+      },[])
 
     const components = [
         {

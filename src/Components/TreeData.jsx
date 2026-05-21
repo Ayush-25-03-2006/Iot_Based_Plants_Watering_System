@@ -10,6 +10,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 function TreeData() {
 
+  useEffect(() => {
+    document.title = "TreeData";
+  },[])
+
   const [status, setStatus] = useState("OFF");
   const [moisture, setMoisture] = useState("--");
   const [isAuto, setIsAuto] = useState(false);
@@ -288,7 +292,7 @@ function TreeData() {
       <div className="accordion accordion-flush" id="accordionFlushExample">
         <div className="accordion-item">
           <h2 className="accordion-header" id="flush-headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
               About Soil Moisture Level
             </button>
           </h2>

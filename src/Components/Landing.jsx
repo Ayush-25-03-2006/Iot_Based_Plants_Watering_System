@@ -12,6 +12,10 @@ function Landing() {
 
     // Track scroll for parallax effects
     useEffect(() => {
+        document.title = "IOT-Based-Plant-Watering-System";
+      },[])
+
+    useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
