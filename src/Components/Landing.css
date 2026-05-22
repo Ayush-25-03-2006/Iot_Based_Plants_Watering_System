@@ -59,6 +59,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    margin-bottom: 240px;
 }
 
 /* ===== SPLINE ===== */
@@ -67,7 +68,7 @@ body{
 
     width:100%;
     max-width:650px;
-    height:700px;
+    height:600px;
 
     border-radius:35px;
 
@@ -175,9 +176,6 @@ body{
     margin-bottom:30px;
 }
 
-.taging{
-  /* margin-top: 20px; */
-}
 
 .tag-icon{
     font-size:18px;
