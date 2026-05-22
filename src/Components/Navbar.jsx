@@ -34,7 +34,7 @@ function Navbar() {
                         className="bi bi-tree-fill"
                     ></i>
 
-                    <span>
+                    <span className="head">
                         IOT Plant Watering
                     </span>
 
@@ -66,6 +66,7 @@ function Navbar() {
                         <Link
                             to="/"
                             onClick={closeMenu}
+                            className="head"
                         >
                             Home
                         </Link>
@@ -77,6 +78,7 @@ function Navbar() {
                         <Link
                             to="/Demonstration"
                             onClick={closeMenu}
+                            className="head"
                         >
                             Demonstration
                         </Link>
@@ -88,6 +90,7 @@ function Navbar() {
                         <Link
                             to="/DetailsPlant"
                             onClick={closeMenu}
+                            className="head"
                         >
                             Plant Care
                         </Link>
@@ -99,6 +102,7 @@ function Navbar() {
                         <Link
                             to="/Circuit"
                             onClick={closeMenu}
+                            className="head"
                         >
                             Circuit
                         </Link>
@@ -110,6 +114,7 @@ function Navbar() {
                         <Link
                             to="/TreeData"
                             onClick={closeMenu}
+                            className="head"
                         >
                             Tree Data
                         </Link>
