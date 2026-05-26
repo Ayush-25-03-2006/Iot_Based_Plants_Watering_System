@@ -52,7 +52,9 @@ function TreeData() {
 
       client.subscribe("plant/moisture");
 
-      client.subscribe("plant/status");
+      client.subscribe("plant/status", () => {
+        client.publish("plant/getStatus","GET");
+      });
 
     });
 
@@ -95,13 +97,9 @@ function TreeData() {
     return () => {
 
       if (client) {
-
         client.end();
-
       }
-
     };
-
   }, []);
 
   // Manual Control
@@ -278,11 +276,12 @@ function TreeData() {
               }
             </button>
             <button
-              onClick={handleAuto}
+              onClick={handleAuto, handleClick}
               className="auto-btn"
             >
-              {
-                "AUTO MODE"
+              { isAuto ?
+                "TURN OFF" :
+                "AUTO MODE" 
               }
             </button>
           </div>
