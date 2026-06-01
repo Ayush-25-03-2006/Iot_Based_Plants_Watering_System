@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function TreeData() {
-  const [status, setStatus] = useState("OFF");
+  const [status, setStatus] = useState("ON");
   const [moisture, setMoisture] = useState("--");
 
   const [manualLoading, setManualLoading] = useState(false);
@@ -44,31 +44,31 @@ function TreeData() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleClick = async () => {
-    setManualLoading(true);
+const handleClick = async () => {
+  setManualLoading(true);
 
-    try {
-      const isTurningOn = status !== "ON";
+  try {
+    const turnOn = status === "OFF";
 
-      const url = isTurningOn
-        ? `${BACKEND_URL}/on`
-        : `${BACKEND_URL}/off`;
+    const url = turnOn
+      ? `${BACKEND_URL}/on`
+      : `${BACKEND_URL}/off`;
 
-      await fetch(url, { method: "POST" });
+    await fetch(url, { method: "POST" });
 
-      setStatus(isTurningOn ? "ON" : "OFF");
+    setStatus(turnOn ? "ON" : "OFF");
 
-      toast.success(
-        `Motor turned ${isTurningOn ? "ON" : "OFF"}`,
-        { autoClose: 1500 }
-      );
+    toast.success(
+      `Motor turned ${turnOn ? "OFF" : "ON"}`,
+      { autoClose: 1500 }
+    );
 
-    } catch (err) {
-      toast.warning("Failed to connect");
-    } finally {
-      setManualLoading(false);
-    }
-  };
+  } catch (err) {
+    toast.warning("Failed to connect");
+  } finally {
+    setManualLoading(false);
+  }
+};
 
   const handleAuto = async () => {
     setAutoLoading(true);
@@ -125,7 +125,7 @@ function TreeData() {
         />
 
         <div className="status">
-          💧 Motor Status:
+          💧Turn Motor Status:
           <span> {status}</span>
         </div>
 
@@ -136,7 +136,7 @@ function TreeData() {
 
         <button
           onClick={handleClick}
-          disabled={manualLoading || isAuto}
+          // disabled={manualLoading || isAuto}
           className="btn1"
         >
           {manualLoading
